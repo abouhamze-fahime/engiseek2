@@ -1,0 +1,29 @@
+{
+  "name": "engiseek-website",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit",
+    "test": "node --experimental-strip-types tests/consultation.test.ts",
+    "test:browser": "node tests/browser.mjs"
+  },
+  "dependencies": {
+    "@supabase/server": "^1.9.2",
+    "next": "16.4.6",
+    "react": "19.2.3",
+    "react-dom": "19.2.3"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^22",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "playwright": "^1.58",
+    "tailwindcss": "^4",
+    "typescript": "^5.9"
+  },
+  "type": "module"
+}

@@ -1,0 +1,9 @@
+'use client';
+import { useState } from 'react';
+import Link from 'next/link';
+import { products } from '@/lib/content';
+import { Arrow } from './icons';
+export function ProductExplorer() {
+ const [selected, setSelected] = useState(0); const product = products[selected];
+ return <div className="product-explorer"><div className="product-tabs" role="tablist" aria-label="Explore products" aria-orientation="vertical">{products.map((p,i) => <button key={p.id} id={`tab-${p.id}`} role="tab" aria-selected={selected === i} aria-controls="product-panel" onClick={() => setSelected(i)} onKeyDown={event => { if (['ArrowDown','ArrowUp','Home','End'].includes(event.key)) { event.preventDefault(); const index=event.key==='Home'?0:event.key==='End'?products.length-1:(selected+(event.key==='ArrowDown'?1:-1)+products.length)%products.length; setSelected(index); document.getElementById(`tab-${products[index].id}`)?.focus(); } }} tabIndex={selected === i ? 0 : -1}><span className="tab-number">0{i+1}</span><span>{p.name}<small>{p.category}</small></span><Arrow diagonal /></button>)}</div><div className="product-panel" id="product-panel" role="tabpanel" aria-labelledby={`tab-${product.id}`}><div className="product-panel-heading"><p className="eyebrow">{product.category}</p><span className="small-label">THE ENGISEEK SUITE</span></div><h3>{product.thesis}</h3><p>{product.description}</p>{selected === 0 ? <div className="product-screenshot"><img src="/images/lab55000.avif" alt="Lab 55000 interface showing asset records, condition assessment and visualisation" width="900" height="500" loading="lazy" /></div> : <div className="product-capabilities">{product.capabilities.map((capability,i)=><div key={capability}><span>0{i+1}</span>{capability}</div>)}</div>}<Link className="text-link" href={`/consultation?interest=${encodeURIComponent(product.name)}`}>See {product.name} in action <Arrow diagonal /></Link></div></div>;
+}
